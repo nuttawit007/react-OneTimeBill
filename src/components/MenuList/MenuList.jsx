@@ -4,7 +4,7 @@ import ChoosePeopleModal from '../ChoosePeopleModal/ChoosePeopleModal';
 
 function MenuList({value, onChange}) {
     // Destructure value with fallbacks to avoid undefined access
-    const {basePeople = [], menuItems = []} = value || {};
+    const {basePeople = [], menuItems = [], setting} = value || {};
 
     const handleDataFromChoosePeopleModal = (index, getData) => {
         // Update chosen people for a specific menu item
@@ -14,7 +14,8 @@ function MenuList({value, onChange}) {
 
         onChange({
             basePeople: getData?.people ?? basePeople,
-            menuItems: updatedMenuItems
+            menuItems: updatedMenuItems,
+            setting: setting
         });
     };
 

@@ -57,6 +57,7 @@ function ChoosePeopleModal({sendDataToMenuList, getBasePeople, getChoosePeople})
 
     const onSubmit = () => {
         sendDataToMenuList({people, choosePeople});
+        console.log("getChoosePeople:", sendDataToMenuList);
     }
 
     return (
