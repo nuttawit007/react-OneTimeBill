@@ -40,6 +40,8 @@ function MenuModal({sendData, getBasePeople}) {
         }
     };
 
+    const canSave = menuName.trim() !== "" && price.trim() !== "";
+
     const onSubmit = () => {
         sendData({menuName, price, people, choosePeople});
         setMenuName("");
@@ -80,7 +82,7 @@ function MenuModal({sendData, getBasePeople}) {
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button onClick={onSubmit} className="btn">Save</button>
+                            <button onClick={onSubmit} className="btn" disabled={!canSave}>Save</button>
                         </form>
                     </div>
                 </div>
