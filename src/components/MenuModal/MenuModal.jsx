@@ -1,16 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
-function MenuModal({sendData, getBasePeople}) {
+function MenuModal({sendDataToMenuList, getBasePeople}) {
     const [menuName, setMenuName] = useState("");
     const [price, setPrice] = useState("");
     const [people, setPeople] = useState([]);
     const [choosePeople, setChoosePeople] = useState([]);
 
+    const dialogRef = useRef(null);
+    const openModal = () => {
+        dialogRef.current.showModal();
+    }
+
     // Initialize people with getBasePeople when getBasePeople changes
     useEffect(() => {
         setPeople(getBasePeople);
-    }, [getBasePeople]);    
-    
+    }, [getBasePeople]);  
+
     const listPeople = people.map((p) => {
         if (choosePeople.includes(p)) {
             return <span key={p} onClick={() => addChoosePeople(p)} className="badge badge-primary mr-2">{p}</span>
@@ -40,10 +45,8 @@ function MenuModal({sendData, getBasePeople}) {
         }
     };
 
-    const canSave = menuName.trim() !== "" && price.trim() !== "";
-
     const onSubmit = () => {
-        sendData({menuName, price, people, choosePeople});
+        sendDataToMenuList({menuName, price, people, choosePeople});
         setMenuName("");
         setPrice("");
         setPeople(getBasePeople);
@@ -52,8 +55,8 @@ function MenuModal({sendData, getBasePeople}) {
     
     return (
         <>
-            <button className="btn w-full" onClick={()=>document.getElementById('my_modal_5').showModal()}>เพิ่ม</button>
-            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+            <button className="btn w-full" onClick={openModal}>เพิ่ม</button>
+            <dialog ref={dialogRef} id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">เพิ่มรายการ</h3>
                     <p className="py-4">ใส่รายละเอียดรายการ,ราคา,คนกิน</p>
@@ -82,7 +85,7 @@ function MenuModal({sendData, getBasePeople}) {
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button onClick={onSubmit} className="btn" disabled={!canSave}>Save</button>
+                            <button onClick={onSubmit} className="btn" >Save</button>
                         </form>
                     </div>
                 </div>
