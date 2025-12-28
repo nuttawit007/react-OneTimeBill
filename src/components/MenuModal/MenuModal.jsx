@@ -7,6 +7,7 @@ function MenuModal({sendDataToMenuList, getBasePeople}) {
     const [choosePeople, setChoosePeople] = useState([]);
 
     const dialogRef = useRef(null);
+    const inputRef = useRef(null);
     const openModal = () => {
         dialogRef.current.showModal();
     }
@@ -29,12 +30,11 @@ function MenuModal({sendDataToMenuList, getBasePeople}) {
     });
 
     const addNewPeople = () => {
-        const input = document.getElementById('addpeople');
-        const newPeople = input.value.trim();
+        const newPeople = inputRef.current.value.trim();
         if (newPeople && !people.includes(newPeople)) {
             setPeople([...people, newPeople]);
         }
-        input.value = "";
+        inputRef.current.value = "";
     }
 
     const addChoosePeople = (p) => {
@@ -73,7 +73,7 @@ function MenuModal({sendDataToMenuList, getBasePeople}) {
 
                     {/* People input */}
                     <label htmlFor="addpeople">เพิ่มคน</label>
-                    <input  id="addpeople" type="text" className="border-2 rounded-2xl" />
+                    <input ref={inputRef} type="text" className="border-2 rounded-2xl" />
                     <button type="button" className='btn btn-secondary' onClick={addNewPeople}>เพิ่ม</button>
 
                     {/* List people */}
