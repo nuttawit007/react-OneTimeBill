@@ -60,7 +60,7 @@ function MenuModal({sendDataToMenuList, getBasePeople}) {
         setPeople(getBasePeople);
         setChoosePeople([]);
     }
-    
+
     return (
         <>
             <button className="btn w-full" onClick={openModal}>เพิ่ม</button>

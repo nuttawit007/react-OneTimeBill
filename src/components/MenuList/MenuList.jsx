@@ -39,6 +39,13 @@ function MenuList({value, onChange}) {
         });
     };
 
+    const deleteAllMenuList = () => {
+        onChange({
+            basePeople: [],
+            menuItems: []
+        });
+    }
+
     return (
         <>
             <div className='flex'>
@@ -72,7 +79,7 @@ function MenuList({value, onChange}) {
                 <MenuModal sendDataToMenuList={handleDataFromMenuModal} getBasePeople={basePeople}/>
             </div>
             <div className='flex'>
-                <button>ลบทั้งหมด</button>
+                <button onClick={deleteAllMenuList}>ลบทั้งหมด</button>
             </div>
         </>
     )
